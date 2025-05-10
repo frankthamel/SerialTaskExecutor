@@ -1,3 +1,10 @@
+//
+//  SerialTaskExecutorTests.swift
+//  SerialTaskExecutor
+//
+//  Created by Frank Thamel on 10/05/2025.
+//
+
 import XCTest
 @testable import SerialTaskExecutor
 

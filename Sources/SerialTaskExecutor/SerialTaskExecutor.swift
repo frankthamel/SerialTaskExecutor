@@ -1,5 +1,9 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+//
+//  SerialTaskExecutor.swift
+//  SerialTaskExecutor
+//
+//  Created by Frank Thamel on 10/05/2025.
+//
 
 import Foundation
 
