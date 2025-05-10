@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Assets/logo.svg" width="200" alt="SerialTaskExecutor Logo">
+</p>
+
 # SerialTaskExecutor
 
 A Swift package that provides a mechanism to execute async tasks serially, ensuring one task completely finishes before the next one starts, even across suspension points.

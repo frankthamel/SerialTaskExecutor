@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="#F05138" opacity="0.9"/>
+  
+  <!-- Swift bird stylized -->
+  <path d="M160 80c0-5-10-15-25-15s-25 10-25 15c0 5 10 15 25 15s25-10 25-15z" fill="white"/>
+  
+  <!-- Serial task representation - connected boxes -->
+  <rect x="50" y="65" width="30" height="30" rx="5" fill="white"/>
+  <rect x="85" y="65" width="30" height="30" rx="5" fill="white"/>
+  <rect x="120" y="65" width="30" height="30" rx="5" fill="white"/>
+  
+  <!-- Connection arrows -->
+  <polygon points="80,80 85,75 85,85" fill="white"/>
+  <line x1="80" y1="80" x2="85" y2="80" stroke="white" stroke-width="2"/>
+  
+  <polygon points="115,80 120,75 120,85" fill="white"/>
+  <line x1="115" y1="80" x2="120" y2="80" stroke="white" stroke-width="2"/>
+  
+  <!-- "Executor" text below -->
+  <text x="100" y="125" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">SerialTaskExecutor</text>
+  
+  <!-- Async symbol -->
+  <path d="M70 135 L85 145 L70 155 Z" fill="white"/>
+  <path d="M85 135 L100 145 L85 155 Z" fill="white"/>
+  <path d="M100 135 L115 145 L100 155 Z" fill="white"/>
+  <path d="M115 135 L130 145 L115 155 Z" fill="white"/>
+</svg> 
