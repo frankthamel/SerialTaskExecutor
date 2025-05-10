@@ -1,11 +1,12 @@
 # SerialTaskExecutor
 
-A Swift package that provides a mechanism to execute tasks serially, ensuring one task completes before the next one starts.
+A Swift package that provides a mechanism to execute async tasks serially, ensuring one task completely finishes before the next one starts, even across suspension points.
 
 ## Features
 
-- Serial execution of tasks
-- Thread-safe task management
+- Serial execution of async/await tasks
+- Proper handling of task suspension points (unlike regular actors)
+- Support for return values and error propagation
 - Simple and intuitive API
 
 ## Installation
@@ -22,23 +23,73 @@ dependencies: [
 
 ## Usage
 
+Swift's native concurrency model doesn't guarantee that tasks will execute in the order they were created when using multiple Task blocks. `SerialTaskExecutor` solves this by ensuring tasks are executed one after another, in the exact order they were enqueued.
+
+### Basic Usage
+
 ```swift
 import SerialTaskExecutor
 
 // Create an executor
 let executor = SerialTaskExecutor()
 
-// Add tasks to be executed serially
-executor.execute {
-    // Task 1
-    print("Executing first task")
-}
-
-executor.execute {
-    // Task 2
-    print("Executing second task")
+// Execute tasks serially
+Task {
+    try await executor.enqueue {
+        // First task
+        try await Task.sleep(for: .seconds(1))
+        print("First task completed")
+    }
+    
+    try await executor.enqueue {
+        // Second task (won't start until first task completes)
+        try await Task.sleep(for: .seconds(1))
+        print("Second task completed")
+    }
 }
 ```
+
+### Working with Return Values
+
+```swift
+let executor = SerialTaskExecutor()
+
+Task {
+    // Get data from first task
+    let data = try await executor.enqueue {
+        try await networkService.fetchData()
+    }
+    
+    // Use that data in the second task
+    try await executor.enqueue {
+        try await databaseService.save(data: data)
+    }
+    
+    print("All operations completed in order")
+}
+```
+
+### Error Handling
+
+Errors thrown by tasks are properly propagated:
+
+```swift
+let executor = SerialTaskExecutor()
+
+Task {
+    do {
+        try await executor.enqueue {
+            throw SomeError.failed
+        }
+    } catch {
+        print("Task failed with error: \(error)")
+    }
+}
+```
+
+## Why not just use actors?
+
+Unlike regular Swift actors, which allow multiple tasks to execute concurrently if a task suspends at an `await` point, `SerialTaskExecutor` guarantees that tasks will fully complete before the next one starts, providing true serial execution.
 
 ## License
 
