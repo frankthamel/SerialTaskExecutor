@@ -90,6 +90,17 @@ Task {
 
 Unlike regular Swift actors, which allow multiple tasks to execute concurrently if a task suspends at an `await` point, `SerialTaskExecutor` guarantees that tasks will fully complete before the next one starts, providing true serial execution.
 
+## Learn More
+
+I've written a detailed blog post explaining the journey of building this library, from understanding the problem to implementing the final solution. The post walks through:
+
+- The challenge with Swift's concurrency and ordering of async tasks
+- Why actors don't fully solve the problem (the actor reentrancy issue)
+- Step-by-step implementation of the SerialTaskExecutor
+- Potential pitfalls to avoid (like deadlocks)
+
+Read the full article: [Building a Serial Task Executor in Swift](https://iosdevlibrary.com/building-a-serial-task-executor-in-swift/)
+
 ## License
 
 MIT 
