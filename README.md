@@ -40,7 +40,9 @@ Task {
         try await Task.sleep(for: .seconds(1))
         print("First task completed")
     }
-    
+}
+
+Task {
     try await executor.enqueue {
         // Second task (won't start until first task completes)
         try await Task.sleep(for: .seconds(1))
@@ -59,13 +61,6 @@ Task {
     let data = try await executor.enqueue {
         try await networkService.fetchData()
     }
-    
-    // Use that data in the second task
-    try await executor.enqueue {
-        try await databaseService.save(data: data)
-    }
-    
-    print("All operations completed in order")
 }
 ```
 
